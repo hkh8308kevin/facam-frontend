@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const EMPLOYEE_API_BASE_URL = "https://api.fastcampus-dragon.net/api/v1/employees";
+const EMPLOYEE_API_BASE_URL = "https://api.hackboy.shop/api/v1/employees";
 
 class EmployeeService {
-
   getEmployees() {
     return axios.get(EMPLOYEE_API_BASE_URL);
   }
@@ -11,18 +10,23 @@ class EmployeeService {
   addEmployee(employee) {
     return axios.post(EMPLOYEE_API_BASE_URL, employee);
   }
+
   getEmployeeById(id) {
     return axios.get(EMPLOYEE_API_BASE_URL + "/" + id);
   }
+
   updateEmployee(employee) {
-    return axios.put(EMPLOYEE_API_BASE_URL, employee);
+    return axios.put(EMPLOYEE_API_BASE_URL + "/" + employee.id, employee);
   }
+
   deleteEmployee(employee) {
-    return axios.post(EMPLOYEE_API_BASE_URL + "/delete", employee);
+    return axios.delete(EMPLOYEE_API_BASE_URL + "/" + employee.id);
   }
+
   deleteById(id) {
     return axios.delete(EMPLOYEE_API_BASE_URL + "/" + id);
   }
 }
+
 const employeeService = new EmployeeService();
-export default new EmployeeService();
+export default employeeService;
